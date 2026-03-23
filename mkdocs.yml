@@ -14,7 +14,7 @@ theme:
   name: material
   language: zh
   favicon: assets/favicon.png # 如果有图标可以放在这里
-  logo: assets/logo.png
+  logo: assets/avatar.jpg
   palette: 
     # 自动切换深/浅模式
     - media: "(prefers-color-scheme: light)"
@@ -43,32 +43,55 @@ extra_css:
   - stylesheets/extra.css
 
 # 4. 导航栏配置（精准匹配你的目录结构）
+# 4. 导航栏配置（首页现在拥有子节点）
 nav:
-  - 🏠 首页: index.md
-  
+  - 🏠 首页:
+      - 🚀 门户中心: index.md
+      - 📝 关于本站: index.md  # 如果你以后写了 about.md，可以替换掉
+      - 🕒 快速导航:
+          - 🛠️ 工具配置: tools/index.md
+          - 🌍 GIS 实践: GIS/index.md
+          - 💻 C/C++ 核心: c_cpp/index.md
+
   - 🛠️ 工具使用与配置:
       - 工具概览: tools/index.md
-      - IDE 相关配置: tools/as_IDE/index.md
-      - CS 巨头与编译器: tools/as_cmp/index.md
-      
+      - IDE 配置 (VS Code/VS): 
+          - 概览: tools/as_IDE/01_intro.md
+          - Visual Studio 实践: tools/as_IDE/02_VS_01.md
+      - GIS 工具集:
+          - 环境概览: tools/as_GIS/01_intro.md
+          - GeoServer 部署: tools/as_GIS/02_GeoServer.md
+          - ArcGIS 全家桶: tools/as_GIS/03_ArcGIS_01.md
+          - ArcGIS pro: tools/as_GIS/03_ArcGIS_02.md
+      - 计算机基础 (CS):
+          - 导论: tools/cs/01_introduction.md
+          - 文件管理: tools/cs/02_file_management.md
+
   - 🖥️ 计算机使用感悟:
       - 经验总结: CS/index.md
       
   - ⚡ AI 工程:
-      - 实践心得: AI/index.md # 建议后续新建 docs/AI_Eng/index.md
+      - 实践心得: AI/index.md
       
   - 💻 C & C++ 工程实践:
       - 核心指南: c_cpp/index.md
-      - 环境联动: tools/as_IDE/VS3/index.md
       
   - 🐍 Python 工程实践:
       - 环境管理: python/index.md
       
   - 🌍 GIS 算法与实践:
       - 空间分析与自动化: GIS/index.md
+      - GIS 开发实践: 
+          - 基础入门: GIS/GIS_DEV/01_intro.md
       
   - 🌐 Web 开发工程:
       - 开发概览: web_dev/index.md
+      - JavaScript 专题:
+          - 01 简介: web_dev/JavaScipt/01_简介.md
+          - 02 基础: web_dev/JavaScipt/02_基础.md
+          - 03 数据类型: web_dev/JavaScipt/03数据类型.md
+          - 04 作用域和事件: web_dev/JavaScipt/04_作用域和事件.md
+          - DOM 操作: web_dev/JavaScipt/DOM.md
 
 # 5. Markdown 增强插件（支持公式、警告框、复杂表格）
 markdown_extensions:
