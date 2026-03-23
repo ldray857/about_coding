@@ -5,6 +5,8 @@
     --md-primary-fg-color: #3F51B5; 
     --page-bg-color: #f5f7f9; 
     --sidebar-bg-color: #f8f9fa;
+    /* 【核心修复】直接告诉主题顶栏高度是 4.5rem，让它自动对齐 */
+    --md-header-height: 4.5rem; 
 }
 
 [data-md-color-scheme="slate"] {
@@ -15,79 +17,54 @@
 body { background-color: var(--page-bg-color); }
 
 /* =========================================================
-   2. 顶栏“瘦身”与间隙精准控制
+   2. 顶栏拉伸 (与变量保持同步)
 ========================================================= */
 .md-header__inner {
-    /* 顶栏高度从 4.5rem 缩小至 3.5rem，更显干练 */
-    height: 3.5rem; 
+    height: var(--md-header-height);
     display: flex;
     align-items: center;
 }
 
-.md-main {
-    /* 【同步调整】：必须与 header 高度一致，防止内容被遮挡 */
-    padding-top: 3.5rem !important; 
-}
-
+/* 消除所有可能导致间隙翻倍的默认内边距 */
 .md-main__inner {
-    /* 【核心旋钮】：控制内容卡片与蓝色顶栏的间隙，0.2rem 为视觉极简值 */
-    padding-top: 0.2rem !important; 
+    padding-top: 0 !important; 
+    margin-top: 0 !important;
 }
 
 /* =========================================================
-   3. 布局重塑：卡片感增强
+   3. 间隙精准控制：实现“精致小间隙”
 ========================================================= */
 .md-sidebar { border: none !important; }
 
 @media screen and (min-width: 76.25em) {
-    /* 侧边栏与内容区保持同样的顶部起点 */
     .md-sidebar--primary, 
     .md-sidebar--secondary {
         background-color: var(--sidebar-bg-color);
-        padding: 0.5rem 0;
-        /* 确保侧边栏也随之向上提 */
-        margin-top: 0; 
+        /* 侧边栏顶部留出一点点缝隙 */
+        padding-top: 0.6rem; 
     }
 
     .md-content {
         background-color: var(--md-default-bg-color) !important;
         box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08); 
         border-radius: 12px;
-        /* 顶部 margin 设为 0，因为间隙已由父容器控制 */
-        margin: 0 0.8rem 1.5rem 0.8rem; 
+        
+        /* 【最终旋钮】这个 0.6rem 决定了卡片离顶栏的距离 */
+        /* 如果觉得还是大了，就改成 0.4rem；如果觉得小了，就改成 0.8rem */
+        margin: 0.6rem 0.8rem 1.5rem 0.8rem !important; 
         padding: 0 1.2rem;
     }
 }
 
 /* =========================================================
-   4. 细节打磨：适配窄顶栏
+   4. 细节微调
 ========================================================= */
-.md-logo img { 
-    /* 缩小 Logo 以适配 3.5rem 的顶栏 */
-    height: 1.8rem; 
-    width: auto; 
-}
+.md-logo img { height: 2.2rem; width: auto; }
+.md-search { padding-top: 0.2rem; }
 
-.md-search { 
-    padding-top: 0; 
-}
-
-/* 滚动条美化 */
+/* 滚动条 */
 ::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-thumb { background: rgba(128, 128, 128, 0.2); border-radius: 10px; }
 
 /* Admonition 提示框 */
-.md-typeset .admonition { 
-    border-radius: 8px; 
-    box-shadow: 0 4px 12px rgba(0,0,0,0.05); 
-}
-
-/* =========================================================
-   5. 正文首标题置顶优化
-========================================================= */
-/* 消除 Markdown 渲染出的第一个标题自带的巨大顶部外边距 */
-.md-content__inner h1:first-child,
-.md-typeset h1:first-child {
-    margin-top: 0 !important;
-    padding-top: 0.8rem; /* 给文字留出适度的呼吸感 */
-}
+.md-typeset .admonition { border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
