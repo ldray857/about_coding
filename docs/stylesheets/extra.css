@@ -1,0 +1,71 @@
+/* =========================================================
+   1. 基础变量与深/浅模式适配
+========================================================= */
+:root {
+    --md-primary-fg-color: #3F51B5; 
+    --page-bg-color: #f5f7f9; 
+    --sidebar-bg-color: #f8f9fa;
+}
+
+[data-md-color-scheme="slate"] {
+    --page-bg-color: #121417; 
+    --sidebar-bg-color: #1a1c20;
+}
+
+body { background-color: var(--page-bg-color); }
+
+/* =========================================================
+   2. 顶栏拉伸与间隙精准控制
+========================================================= */
+.md-header__inner {
+    height: 4.5rem; /* 保持拉伸后的高度 */
+    display: flex;
+    align-items: center;
+}
+
+.md-main {
+    /* 1. 确保主容器起始位置紧贴顶栏下沿 */
+    padding-top: 4.5rem !important; 
+}
+
+.md-main__inner {
+    /* 2. 【核心旋钮】：这里控制蓝色顶栏与下方内容的间隙 */
+    /* 0.8rem 是经过视觉测试最舒服的“小间隙” */
+    padding-top: 0.8rem !important; 
+}
+
+/* =========================================================
+   3. 布局重塑：卡片感增强
+========================================================= */
+.md-sidebar { border: none !important; }
+
+@media screen and (min-width: 76.25em) {
+    /* 侧边栏与内容区保持同样的顶部起点 */
+    .md-sidebar--primary, 
+    .md-sidebar--secondary {
+        background-color: var(--sidebar-bg-color);
+        padding: 0.5rem 0;
+    }
+
+    .md-content {
+        background-color: var(--md-default-bg-color) !important;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08); 
+        border-radius: 12px;
+        /* 这里的 margin 设为 0，因为间隙已经由父容器的 padding 控制了 */
+        margin: 0 0.8rem 1.5rem 0.8rem; 
+        padding: 0 1.2rem;
+    }
+}
+
+/* =========================================================
+   4. 细节打磨
+========================================================= */
+.md-logo img { height: 2.2rem; width: auto; }
+.md-search { padding-top: 0.2rem; }
+
+/* 滚动条美化 */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-thumb { background: rgba(128, 128, 128, 0.2); border-radius: 10px; }
+
+/* Admonition 提示框 */
+.md-typeset .admonition { border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
