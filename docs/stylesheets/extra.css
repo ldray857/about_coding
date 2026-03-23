@@ -15,23 +15,23 @@
 body { background-color: var(--page-bg-color); }
 
 /* =========================================================
-   2. 顶栏拉伸与间隙精准控制
+   2. 顶栏“瘦身”与间隙精准控制
 ========================================================= */
 .md-header__inner {
-    height: 4.5rem; /* 保持拉伸后的高度 */
+    /* 顶栏高度从 4.5rem 缩小至 3.5rem，更显干练 */
+    height: 3.5rem; 
     display: flex;
     align-items: center;
 }
 
 .md-main {
-    /* 1. 确保主容器起始位置紧贴顶栏下沿 */
-    padding-top: 4.5rem !important; 
+    /* 【同步调整】：必须与 header 高度一致，防止内容被遮挡 */
+    padding-top: 3.5rem !important; 
 }
 
 .md-main__inner {
-    /* 2. 【核心旋钮】：这里控制蓝色顶栏与下方内容的间隙 */
-    /* 0.8rem 是经过视觉测试最舒服的“小间隙” */
-    padding-top: 0.8rem !important; 
+    /* 【核心旋钮】：控制内容卡片与蓝色顶栏的间隙，0.2rem 为视觉极简值 */
+    padding-top: 0.2rem !important; 
 }
 
 /* =========================================================
@@ -45,27 +45,49 @@ body { background-color: var(--page-bg-color); }
     .md-sidebar--secondary {
         background-color: var(--sidebar-bg-color);
         padding: 0.5rem 0;
+        /* 确保侧边栏也随之向上提 */
+        margin-top: 0; 
     }
 
     .md-content {
         background-color: var(--md-default-bg-color) !important;
         box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08); 
         border-radius: 12px;
-        /* 这里的 margin 设为 0，因为间隙已经由父容器的 padding 控制了 */
+        /* 顶部 margin 设为 0，因为间隙已由父容器控制 */
         margin: 0 0.8rem 1.5rem 0.8rem; 
         padding: 0 1.2rem;
     }
 }
 
 /* =========================================================
-   4. 细节打磨
+   4. 细节打磨：适配窄顶栏
 ========================================================= */
-.md-logo img { height: 2.2rem; width: auto; }
-.md-search { padding-top: 0.2rem; }
+.md-logo img { 
+    /* 缩小 Logo 以适配 3.5rem 的顶栏 */
+    height: 1.8rem; 
+    width: auto; 
+}
+
+.md-search { 
+    padding-top: 0; 
+}
 
 /* 滚动条美化 */
 ::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-thumb { background: rgba(128, 128, 128, 0.2); border-radius: 10px; }
 
 /* Admonition 提示框 */
-.md-typeset .admonition { border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+.md-typeset .admonition { 
+    border-radius: 8px; 
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05); 
+}
+
+/* =========================================================
+   5. 正文首标题置顶优化
+========================================================= */
+/* 消除 Markdown 渲染出的第一个标题自带的巨大顶部外边距 */
+.md-content__inner h1:first-child,
+.md-typeset h1:first-child {
+    margin-top: 0 !important;
+    padding-top: 0.8rem; /* 给文字留出适度的呼吸感 */
+}
